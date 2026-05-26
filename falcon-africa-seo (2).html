@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Falcon Africa — SEO Content Pipeline</title>
+<meta name="description" content="AI-powered SEO content pipeline by Falcon Africa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --night:#05080f;--ink:#0c1120;--card:#111827;--card2:#161f30;
+  --rim:#1e2d45;--rim2:#253550;--gold:#f5a623;--gold2:#fbbf24;
+  --lime:#a3e635;--sky:#38bdf8;--rose:#fb7185;--text:#eef2ff;
+  --sub:#8a9bbf;--faint:#3a4a65;
+  --ff:'Outfit',sans-serif;--fm:'JetBrains Mono',monospace;--fb:'Bebas Neue',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--night);color:var(--text);font-family:var(--ff);font-size:15px;line-height:1.65;min-height:100vh;}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 2.5rem;border-bottom:1px solid var(--rim);background:rgba(5,8,15,0.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;}
+.nav-brand{display:flex;align-items:center;gap:14px;}
+.falcon-icon{width:38px;height:38px;}
+.brand-name{font-family:var(--fb);font-size:22px;letter-spacing:2px;color:var(--text);line-height:1;}
+.brand-name span{color:var(--gold);}
+.brand-sub{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--sub);font-family:var(--fm);}
+.nav-badge{display:flex;align-items:center;gap:6px;background:rgba(245,166,35,0.1);border:1px solid rgba(245,166,35,0.3);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--gold);font-family:var(--fm);}
+.nav-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--gold);animation:livepulse 2s infinite;}
+@keyframes livepulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.4;transform:scale(0.8)}}
+
+.hero{text-align:center;padding:3.5rem 2rem 2.5rem;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-120px;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(245,166,35,0.07) 0%,transparent 70%);pointer-events:none;}
+.hero-eyebrow{font-family:var(--fm);font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:10px;}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:32px;height:1px;background:var(--gold);opacity:0.5;}
+.hero-title{font-family:var(--fb);font-size:clamp(42px,7vw,76px);letter-spacing:3px;line-height:0.95;margin-bottom:1rem;}
+.hero-title .line2{color:var(--gold);display:block;}
+.hero-desc{font-size:15px;color:var(--sub);max-width:520px;margin:0 auto 2rem;line-height:1.7;}
+.hero-stats{display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap;}
+.hero-stat{text-align:center;}
+.hero-stat-num{font-family:var(--fb);font-size:28px;color:var(--gold);letter-spacing:1px;line-height:1;}
+.hero-stat-lbl{font-size:11px;color:var(--sub);letter-spacing:0.08em;text-transform:uppercase;}
+.hero-divider{width:1px;height:36px;background:var(--rim2);}
+
+.container{max-width:960px;margin:0 auto;padding:2rem 2rem 4rem;}
+
+/* API KEY BANNER */
+.apikey-banner{
+  background:linear-gradient(135deg,rgba(245,166,35,0.08),rgba(245,166,35,0.03));
+  border:1px solid rgba(245,166,35,0.25);
+  border-radius:12px;
+  padding:1.1rem 1.5rem;
+  margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+}
+.apikey-banner-icon{font-size:20px;flex-shrink:0;}
+.apikey-banner-text{flex:1;min-width:200px;}
+.apikey-banner-title{font-size:13px;font-weight:600;color:var(--gold);margin-bottom:3px;}
+.apikey-banner-sub{font-size:12px;color:var(--sub);}
+.apikey-banner-sub a{color:var(--sky);text-decoration:none;}
+.apikey-banner-sub a:hover{text-decoration:underline;}
+.apikey-input-wrap{display:flex;align-items:center;gap:8px;flex-shrink:0;}
+.apikey-input{
+  background:var(--ink);border:1px solid var(--rim2);border-radius:7px;
+  color:var(--text);font-family:var(--fm);font-size:12px;
+  padding:0.5rem 0.9rem;outline:none;width:260px;
+  transition:border-color 0.2s;
+}
+.apikey-input:focus{border-color:var(--gold);}
+.apikey-save-btn{
+  background:var(--gold);color:var(--night);border:none;border-radius:7px;
+  font-family:var(--fb);font-size:13px;letter-spacing:1px;
+  padding:0.5rem 1.1rem;cursor:pointer;white-space:nowrap;
+  transition:background 0.15s;
+}
+.apikey-save-btn:hover{background:var(--gold2);}
+.apikey-status{font-family:var(--fm);font-size:11px;margin-top:6px;min-height:16px;}
+.apikey-status.ok{color:var(--lime);}
+.apikey-status.err{color:var(--rose);}
+
+.form-card{background:var(--card);border:1px solid var(--rim);border-radius:16px;overflow:hidden;margin-bottom:2rem;}
+.form-card-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.5rem;background:var(--card2);border-bottom:1px solid var(--rim);}
+.form-card-title{font-family:var(--fm);font-size:11px;text-transform:uppercase;letter-spacing:0.15em;color:var(--sub);display:flex;align-items:center;gap:8px;}
+.step-pill{background:var(--gold);color:var(--night);font-family:var(--fb);font-size:13px;padding:2px 10px;border-radius:12px;letter-spacing:1px;}
+.form-body{padding:1.5rem;}
+.input-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.field{display:flex;flex-direction:column;gap:7px;}
+.field.full{grid-column:1/-1;}
+label{font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--sub);font-family:var(--fm);}
+input[type=text],select,textarea{background:var(--ink);border:1px solid var(--rim);border-radius:8px;color:var(--text);font-family:var(--ff);font-size:14px;padding:0.65rem 0.9rem;outline:none;transition:border-color 0.2s,box-shadow 0.2s;width:100%;}
+input[type=text]:focus,select:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(245,166,35,0.1);}
+input[type=text]::placeholder,textarea::placeholder{color:var(--faint);}
+select{cursor:pointer;}select option{background:var(--card);}
+textarea{resize:vertical;min-height:72px;}
+.form-footer{display:flex;align-items:center;gap:1rem;padding:1rem 1.5rem 1.5rem;flex-wrap:wrap;}
+.run-btn{background:var(--gold);color:var(--night);border:none;border-radius:8px;font-family:var(--fb);font-size:17px;letter-spacing:1.5px;padding:0.75rem 2.2rem;cursor:pointer;display:flex;align-items:center;gap:10px;transition:all 0.15s;}
+.run-btn:hover{background:var(--gold2);transform:translateY(-1px);}
+.run-btn:active{transform:translateY(0);}
+.run-btn:disabled{background:#3a3010;color:#6a5820;cursor:not-allowed;transform:none;}
+.run-status{font-family:var(--fm);font-size:12px;color:var(--sub);flex:1;}
+.progress-wrap{height:3px;background:var(--rim);border-radius:0 0 16px 16px;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:0 0 16px 16px;width:0%;transition:width 0.5s ease;}
+
+.pipeline-track{display:flex;align-items:center;margin-bottom:2rem;background:var(--card);border:1px solid var(--rim);border-radius:12px;padding:1rem 1.5rem;overflow-x:auto;}
+.track-step{display:flex;align-items:center;flex:1;min-width:90px;}
+.track-dot-wrap{display:flex;flex-direction:column;align-items:center;gap:5px;flex-shrink:0;}
+.track-dot{width:32px;height:32px;border-radius:50%;border:2px solid var(--rim2);display:flex;align-items:center;justify-content:center;font-family:var(--fb);font-size:14px;color:var(--sub);transition:all 0.3s;background:var(--ink);}
+.track-dot.active{border-color:var(--gold);color:var(--gold);background:rgba(245,166,35,0.1);}
+.track-dot.done{border-color:var(--lime);color:var(--night);background:var(--lime);}
+.track-label{font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:var(--sub);text-align:center;white-space:nowrap;}
+.track-label.active{color:var(--gold);}
+.track-label.done{color:var(--lime);}
+.track-line{flex:1;height:2px;background:var(--rim);margin:0 6px;margin-bottom:18px;transition:background 0.3s;}
+.track-line.done{background:var(--lime);}
+
+.output-section-title{font-family:var(--fm);font-size:11px;text-transform:uppercase;letter-spacing:0.15em;color:var(--sub);margin-bottom:1rem;display:flex;align-items:center;gap:12px;}
+.output-section-title::after{content:'';flex:1;height:1px;background:var(--rim);}
+.output-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1rem;}
+.out-card{background:var(--card);border:1px solid var(--rim);border-radius:12px;overflow:hidden;transition:border-color 0.3s;}
+.out-card.full{grid-column:1/-1;}
+.out-card.is-active{border-color:rgba(245,166,35,0.5);box-shadow:0 0 20px rgba(245,166,35,0.05);}
+.out-card.is-done{border-color:rgba(163,230,53,0.3);}
+.out-card-header{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;background:var(--card2);border-bottom:1px solid var(--rim);}
+.out-card-title{display:flex;align-items:center;gap:8px;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--sub);font-family:var(--fm);}
+.sdot{width:8px;height:8px;border-radius:50%;background:var(--faint);flex-shrink:0;transition:all 0.3s;}
+.sdot.pulse{background:var(--gold);animation:sdotpulse 1s infinite;}
+.sdot.done{background:var(--lime);animation:none;}
+@keyframes sdotpulse{0%,100%{opacity:1}50%{opacity:0.2}}
+.copy-btn{background:transparent;border:1px solid var(--rim2);border-radius:5px;color:var(--sub);font-family:var(--fm);font-size:10px;padding:3px 10px;cursor:pointer;text-transform:uppercase;letter-spacing:0.08em;transition:all 0.15s;}
+.copy-btn:hover{border-color:var(--sky);color:var(--sky);}
+.out-body{padding:1.1rem;min-height:110px;font-size:13.5px;line-height:1.75;color:var(--text);white-space:pre-wrap;word-break:break-word;}
+.placeholder-txt{color:var(--faint);font-style:italic;font-size:13px;}
+.streaming-cursor::after{content:'▋';color:var(--gold);animation:cur 0.7s infinite;}
+@keyframes cur{0%,100%{opacity:1}50%{opacity:0}}
+
+footer{border-top:1px solid var(--rim);padding:1.5rem 2.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;background:var(--ink);}
+.footer-brand{display:flex;align-items:center;gap:10px;}
+.footer-brand-name{font-family:var(--fb);font-size:16px;letter-spacing:2px;color:var(--sub);}
+.footer-brand-name span{color:var(--gold);}
+.footer-copy{font-size:12px;color:var(--faint);font-family:var(--fm);}
+.footer-links{display:flex;gap:1.5rem;}
+.footer-links a{font-size:12px;color:var(--sub);text-decoration:none;font-family:var(--fm);letter-spacing:0.05em;transition:color 0.15s;}
+.footer-links a:hover{color:var(--gold);}
+
+@media(max-width:640px){
+  nav{padding:0.9rem 1.2rem;}
+  .hero{padding:2.5rem 1.2rem 2rem;}
+  .container{padding:1.2rem 1.2rem 3rem;}
+  .input-grid,.output-grid{grid-template-columns:1fr;}
+  .out-card.full{grid-column:1;}
+  .apikey-input{width:100%;}
+  .apikey-banner{flex-direction:column;align-items:flex-start;}
+  .apikey-input-wrap{width:100%;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <svg class="falcon-icon" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M19 3L30 10L30 20L19 35L8 20L8 10Z" fill="none" stroke="#f5a623" stroke-width="1.5"/>
+      <path d="M19 3L19 35" stroke="#f5a623" stroke-width="1" opacity="0.4"/>
+      <path d="M8 10L19 18L30 10" stroke="#f5a623" stroke-width="1" opacity="0.4"/>
+      <circle cx="19" cy="18" r="3.5" fill="#f5a623"/>
+      <path d="M13 6Q19 14 13 24" stroke="#f5a623" stroke-width="1.2" fill="none" opacity="0.6"/>
+      <path d="M25 6Q19 14 25 24" stroke="#f5a623" stroke-width="1.2" fill="none" opacity="0.6"/>
+    </svg>
+    <div>
+      <div class="brand-name">FALCON <span>AFRICA</span></div>
+      <div class="brand-sub">SEO Intelligence Suite</div>
+    </div>
+  </div>
+  <div class="nav-badge">AI Pipeline Live</div>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Powered by Claude AI</div>
+  <h1 class="hero-title">SEO CONTENT<span class="line2">PIPELINE</span></h1>
+  <p class="hero-desc">Enter your topic and watch Falcon Africa's AI engine generate a full SEO content package — keywords, outlines, articles and meta tags — in seconds.</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hero-stat-num">5</div><div class="hero-stat-lbl">Pipeline Steps</div></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><div class="hero-stat-num">800+</div><div class="hero-stat-lbl">Words Generated</div></div>
+    <div class="hero-divider"></div>
+    <div class="hero-stat"><div class="hero-stat-num">100%</div><div class="hero-stat-lbl">Free to Use</div></div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- API KEY SECTION -->
+  <div class="apikey-banner">
+    <div class="apikey-banner-icon">🔑</div>
+    <div class="apikey-banner-text">
+      <div class="apikey-banner-title">Anthropic API Key Required</div>
+      <div class="apikey-banner-sub">Get your free key at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> — your key is stored only in your browser and never sent anywhere except Anthropic.</div>
+      <div class="apikey-status" id="keyStatus"></div>
+    </div>
+    <div class="apikey-input-wrap" style="flex-direction:column;align-items:flex-start;gap:6px;">
+      <div style="display:flex;gap:8px;width:100%;">
+        <input class="apikey-input" type="password" id="apiKeyInput" placeholder="sk-ant-api03-..." autocomplete="off"/>
+        <button class="apikey-save-btn" onclick="saveKey()">SAVE</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- INPUT FORM -->
+  <div class="form-card">
+    <div class="form-card-header">
+      <div class="form-card-title"><span class="step-pill">INPUT</span>Campaign brief</div>
+      <div style="font-size:11px;color:var(--faint);font-family:var(--fm);">Context is optional</div>
+    </div>
+    <div class="form-body">
+      <div class="input-grid">
+        <div class="field">
+          <label>Primary Keyword / Topic</label>
+          <input type="text" id="keyword" placeholder="e.g. digital marketing for SMEs in Lagos"/>
+        </div>
+        <div class="field">
+          <label>Target Audience</label>
+          <input type="text" id="audience" placeholder="e.g. Nigerian business owners"/>
+        </div>
+        <div class="field">
+          <label>Content Type</label>
+          <select id="ctype">
+            <option value="blog post">Blog Post</option>
+            <option value="landing page">Landing Page</option>
+            <option value="pillar article">Pillar Article</option>
+            <option value="listicle">Listicle</option>
+            <option value="how-to guide">How-To Guide</option>
+            <option value="product description">Product Description</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Industry / Niche</label>
+          <input type="text" id="industry" placeholder="e.g. fintech, e-commerce, real estate"/>
+        </div>
+        <div class="field full">
+          <label>Additional Context (optional)</label>
+          <textarea id="ctx" placeholder="Brand tone, competitor sites, specific angles, target country..."></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="form-footer">
+      <button class="run-btn" id="runBtn" onclick="runPipeline()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        RUN PIPELINE
+      </button>
+      <div class="run-status" id="runStatus">Enter your API key above, fill your brief, then hit Run</div>
+    </div>
+    <div class="progress-wrap"><div class="progress-fill" id="progFill"></div></div>
+  </div>
+
+  <!-- PIPELINE TRACKER -->
+  <div class="pipeline-track">
+    <div class="track-step">
+      <div class="track-dot-wrap"><div class="track-dot" id="td1">1</div><div class="track-label" id="tl1">Keywords</div></div>
+      <div class="track-line" id="tline1"></div>
+    </div>
+    <div class="track-step">
+      <div class="track-dot-wrap"><div class="track-dot" id="td2">2</div><div class="track-label" id="tl2">Titles</div></div>
+      <div class="track-line" id="tline2"></div>
+    </div>
+    <div class="track-step">
+      <div class="track-dot-wrap"><div class="track-dot" id="td3">3</div><div class="track-label" id="tl3">Outline</div></div>
+      <div class="track-line" id="tline3"></div>
+    </div>
+    <div class="track-step">
+      <div class="track-dot-wrap"><div class="track-dot" id="td4">4</div><div class="track-label" id="tl4">Article</div></div>
+      <div class="track-line" id="tline4"></div>
+    </div>
+    <div class="track-step" style="flex:0">
+      <div class="track-dot-wrap"><div class="track-dot" id="td5">5</div><div class="track-label" id="tl5">Meta</div></div>
+    </div>
+  </div>
+
+  <!-- OUTPUTS -->
+  <div class="output-section-title">Pipeline output</div>
+  <div class="output-grid">
+    <div class="out-card" id="oc-kw">
+      <div class="out-card-header">
+        <div class="out-card-title"><div class="sdot" id="sd-kw"></div>Keyword Cluster</div>
+        <button class="copy-btn" onclick="copyOut('kw')">Copy</button>
+      </div>
+      <div class="out-body" id="ob-kw"><span class="placeholder-txt">Waiting for pipeline...</span></div>
+    </div>
+    <div class="out-card" id="oc-tt">
+      <div class="out-card-header">
+        <div class="out-card-title"><div class="sdot" id="sd-tt"></div>Title Tags × 5</div>
+        <button class="copy-btn" onclick="copyOut('tt')">Copy</button>
+      </div>
+      <div class="out-body" id="ob-tt"><span class="placeholder-txt">Waiting for pipeline...</span></div>
+    </div>
+    <div class="out-card" id="oc-ol">
+      <div class="out-card-header">
+        <div class="out-card-title"><div class="sdot" id="sd-ol"></div>Content Outline</div>
+        <button class="copy-btn" onclick="copyOut('ol')">Copy</button>
+      </div>
+      <div class="out-body" id="ob-ol"><span class="placeholder-txt">Waiting for pipeline...</span></div>
+    </div>
+    <div class="out-card" id="oc-mt">
+      <div class="out-card-header">
+        <div class="out-card-title"><div class="sdot" id="sd-mt"></div>Meta Descriptions × 3</div>
+        <button class="copy-btn" onclick="copyOut('mt')">Copy</button>
+      </div>
+      <div class="out-body" id="ob-mt"><span class="placeholder-txt">Waiting for pipeline...</span></div>
+    </div>
+    <div class="out-card full" id="oc-ar">
+      <div class="out-card-header">
+        <div class="out-card-title"><div class="sdot" id="sd-ar"></div>Full SEO Article</div>
+        <button class="copy-btn" onclick="copyOut('ar')">Copy</button>
+      </div>
+      <div class="out-body" id="ob-ar"><span class="placeholder-txt">Waiting for pipeline...</span></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-brand">
+    <svg width="24" height="24" viewBox="0 0 38 38" fill="none">
+      <path d="M19 3L30 10L30 20L19 35L8 20L8 10Z" fill="none" stroke="#f5a623" stroke-width="1.5"/>
+      <circle cx="19" cy="18" r="3" fill="#f5a623"/>
+    </svg>
+    <div class="footer-brand-name">FALCON <span>AFRICA</span></div>
+  </div>
+  <div class="footer-copy">© 2026 Falcon Africa. AI-powered marketing tools for Africa.</div>
+  <div class="footer-links">
+    <a href="mailto:hello@falconafrica.com">Contact</a>
+    <a href="#" onclick="alert('Privacy: Your API key is stored only in your browser localStorage and is never sent to Falcon Africa servers.');return false;">Privacy</a>
+  </div>
+</footer>
+
+<script>
+const API = "https://api.anthropic.com/v1/messages";
+const MDL = "claude-sonnet-4-20250514";
+let busy = false;
+
+// Load saved key on page load
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('fa_apikey');
+  if (saved) {
+    document.getElementById('apiKeyInput').value = saved;
+    showKeyStatus('ok', '✓ API key loaded from your browser');
+  }
+});
+
+function saveKey() {
+  const k = document.getElementById('apiKeyInput').value.trim();
+  if (!k) { showKeyStatus('err', '✗ Please paste your API key first'); return; }
+  if (!k.startsWith('sk-ant-')) { showKeyStatus('err', '✗ Key should start with sk-ant-...'); return; }
+  localStorage.setItem('fa_apikey', k);
+  showKeyStatus('ok', '✓ Key saved to your browser — ready to run');
+}
+
+function showKeyStatus(type, msg) {
+  const el = document.getElementById('keyStatus');
+  el.textContent = msg;
+  el.className = 'apikey-status ' + type;
+}
+
+function getKey() {
+  const k = document.getElementById('apiKeyInput').value.trim() || localStorage.getItem('fa_apikey');
+  return k;
+}
+
+function setTrack(step, state) {
+  const dot = document.getElementById(`td${step}`);
+  const lbl = document.getElementById(`tl${step}`);
+  const line = document.getElementById(`tline${step}`);
+  dot.className = 'track-dot' + (state==='active'?' active':state==='done'?' done':'');
+  lbl.className = 'track-label' + (state==='active'?' active':state==='done'?' done':'');
+  if (line && state==='done') line.classList.add('done');
+}
+
+function setCard(id, state, msg) {
+  const oc = document.getElementById(`oc-${id}`);
+  const sd = document.getElementById(`sd-${id}`);
+  const ob = document.getElementById(`ob-${id}`);
+  oc.classList.remove('is-active','is-done');
+  sd.classList.remove('pulse','done');
+  if (state==='loading') {
+    oc.classList.add('is-active'); sd.classList.add('pulse');
+    ob._buf=''; ob.innerHTML='<span class="streaming-cursor"></span>';
+  } else if (state==='done') {
+    oc.classList.add('is-done'); sd.classList.add('done');
+  } else if (state==='error') {
+    ob.innerHTML=`<span style="color:var(--rose);font-size:12px;">${msg}</span>`;
+  } else {
+    ob.innerHTML='<span class="placeholder-txt">Waiting for pipeline...</span>';
+  }
+}
+
+function appendStream(id, chunk) {
+  const ob = document.getElementById(`ob-${id}`);
+  if (!ob._buf) ob._buf='';
+  ob._buf += chunk;
+  ob.innerHTML = ob._buf + '<span class="streaming-cursor"></span>';
+}
+
+function doneCard(id) {
+  const ob = document.getElementById(`ob-${id}`);
+  const cursor = ob.querySelector('.streaming-cursor');
+  if (cursor) cursor.remove();
+  document.getElementById(`sd-${id}`).classList.remove('pulse');
+  document.getElementById(`sd-${id}`).classList.add('done');
+  document.getElementById(`oc-${id}`).classList.remove('is-active');
+  document.getElementById(`oc-${id}`).classList.add('is-done');
+}
+
+async function stream(prompt, cardId, apiKey) {
+  const r = await fetch(API, {
+    method:'POST',
+    headers:{'Content-Type':'application/json','x-api-key':apiKey,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},
+    body:JSON.stringify({model:MDL,max_tokens:1200,stream:true,messages:[{role:'user',content:prompt}]})
+  });
+  if (!r.ok) {
+    const t = await r.text();
+    let msg = 'API error — check your key is valid.';
+    try { const j=JSON.parse(t); msg = j.error?.message || msg; } catch {}
+    setCard(cardId, 'error', msg);
+    return null;
+  }
+  const reader = r.body.getReader();
+  const dec = new TextDecoder();
+  let full='';
+  const ob = document.getElementById(`ob-${cardId}`);
+  ob._buf='';
+  while (true) {
+    const {done,value} = await reader.read();
+    if (done) break;
+    for (const line of dec.decode(value).split('\n')) {
+      if (!line.startsWith('data: ')) continue;
+      const d = line.slice(6).trim();
+      if (d==='[DONE]') break;
+      try {
+        const j=JSON.parse(d);
+        if (j.type==='content_block_delta'&&j.delta?.text) {
+          full+=j.delta.text; appendStream(cardId, j.delta.text);
+        }
+      } catch {}
+    }
+  }
+  doneCard(cardId);
+  return full;
+}
+
+async function runPipeline() {
+  if (busy) return;
+  const apiKey = getKey();
+  if (!apiKey) { showKeyStatus('err','✗ Enter and save your API key first'); return; }
+  const kw = document.getElementById('keyword').value.trim();
+  if (!kw) { alert('Please enter a primary keyword or topic.'); return; }
+  const aud = document.getElementById('audience').value.trim()||'general readers';
+  const ct = document.getElementById('ctype').value;
+  const ind = document.getElementById('industry').value.trim()||'general';
+  const ctx = document.getElementById('ctx').value.trim();
+  const extra = ctx?`\n\nExtra context: ${ctx}`:'';
+  const brand='Falcon Africa';
+
+  busy=true;
+  document.getElementById('runBtn').disabled=true;
+  ['kw','tt','ol','ar','mt'].forEach(id=>setCard(id,'idle',''));
+  for(let i=1;i<=5;i++) setTrack(i,'idle');
+
+  const setP = pct => document.getElementById('progFill').style.width=pct+'%';
+  const setSt = t => document.getElementById('runStatus').textContent=t;
+
+  try {
+    setP(4); setSt('Step 1 of 5 — Building keyword cluster...');
+    setTrack(1,'active'); setCard('kw','loading','');
+    await stream(`You are an SEO specialist at ${brand}, a top African marketing agency. Generate a comprehensive keyword cluster for: "${kw}".\nIndustry: ${ind}. Audience: ${aud}.\n\nProvide:\n- PRIMARY KEYWORD (1)\n- SECONDARY KEYWORDS (5)\n- LSI / Semantic Keywords (5)\n- Long-tail Keywords (4)\n- Question Keywords (3)\n- Search intent note per group\n\nBe specific and Africa-market-aware where relevant. Format with clear headings.${extra}`,'kw',apiKey);
+    setTrack(1,'done'); setP(20);
+
+    setSt('Step 2 of 5 — Writing title tags...');
+    setTrack(2,'active'); setCard('tt','loading','');
+    await stream(`You are an SEO copywriter at ${brand}. Write 5 high-CTR title tags for a ${ct} about: "${kw}".\nAudience: ${aud}. Industry: ${ind}.\n\nRules:\n- Each title max 60 characters\n- Include primary keyword\n- Vary formats: number list, how-to, question, benefit-led, direct\n- Optimised for African search intent where applicable\n\nNumber each title and show the character count in brackets.${extra}`,'tt',apiKey);
+    setTrack(2,'done'); setP(38);
+
+    setSt('Step 3 of 5 — Building content outline...');
+    setTrack(3,'active'); setCard('ol','loading','');
+    await stream(`You are a content strategist at ${brand}. Create a detailed SEO content outline for a ${ct} on: "${kw}".\nAudience: ${aud}. Industry: ${ind}.\n\nInclude:\n- Recommended H1\n- H2 sections with H3 sub-points\n- Suggested word count per section\n- CTA placement notes\n- Internal linking opportunities\n- Featured snippet targeting suggestion\n\nFormat with clear hierarchy.${extra}`,'ol',apiKey);
+    setTrack(3,'done'); setP(56);
+
+    setSt('Step 4 of 5 — Writing full article...');
+    setTrack(4,'active'); setCard('ar','loading','');
+    await stream(`You are a senior SEO content writer at ${brand}, Africa's leading marketing agency. Write a complete, publication-ready ${ct} about: "${kw}".\nAudience: ${aud}. Industry: ${ind}.\n\nRequirements:\n- Compelling hook in first sentence\n- Primary keyword in first 100 words\n- Natural keyword variations throughout\n- H2/H3 subheadings\n- One relevant Africa/Nigeria market insight if applicable\n- Conversational yet authoritative tone\n- Strong call-to-action at the end\n- 700–900 words\n- Do NOT mention it is AI-generated${extra}`,'ar',apiKey);
+    setTrack(4,'done'); setP(80);
+
+    setSt('Step 5 of 5 — Generating meta descriptions...');
+    setTrack(5,'active'); setCard('mt','loading','');
+    await stream(`You are an SEO copywriter at ${brand}. Write 3 meta description options for a ${ct} about: "${kw}".\nAudience: ${aud}.\n\nRules:\n- Each exactly 150–160 characters\n- Include primary keyword naturally\n- Include a CTA verb (Discover, Learn, Get, Find out)\n- Be compelling and click-worthy\n\nNumber each option and show the character count in brackets after.${extra}`,'mt',apiKey);
+    setTrack(5,'done'); setP(100);
+    setSt('✓ Pipeline complete — all 5 steps done');
+
+  } catch(e) {
+    setSt('Error: '+e.message);
+  }
+
+  document.getElementById('runBtn').disabled=false;
+  busy=false;
+}
+
+function copyOut(id) {
+  const ob = document.getElementById(`ob-${id}`);
+  const txt = ob._buf||ob.innerText;
+  navigator.clipboard.writeText(txt).then(()=>{
+    const btn = ob.closest('.out-card').querySelector('.copy-btn');
+    const orig=btn.textContent; btn.textContent='Copied ✓';
+    setTimeout(()=>btn.textContent=orig,1800);
+  });
+}
+</script>
+</body>
+</html>
